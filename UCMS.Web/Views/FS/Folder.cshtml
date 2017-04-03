@@ -1,0 +1,116 @@
+﻿<div ng-controller="folderCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li ng-repeat="item in folder.Path">
+                <a ng-if="!$last" href="/fs/folder?id={{item.Id}}">{{item.Name}}</a>
+                <i ng-if="!$last" class="fa fa-circle"></i>
+                <span ng-if="$last">{{item.Name}}</span>
+            </li>
+        </ul>
+
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        {{folder.Name}}
+        @*<small>Manage library in UCCM</small>*@
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div ng-repeat="item in alertSvc.alerts" class="alert alert-{{item.type}}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="alertSvc.remove(item)"></button>
+        <strong>{{item.title}}</strong> {{item.body}}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-folder font-yellow-casablanca"></i>
+                        <span class="caption-subject bold font-yellow-casablanca uppercase">Folders </span>
+                    </div>
+                    
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn blue" ng-click="createDir()">New</button>
+                        </div>
+                    </div>
+                    <div class="table-scrollable">
+                        <table class="table table-hover table-condensed table-light">
+                            <thead>
+                                <tr>
+                                    <th style="width: 150px"> Id </th>
+                                    <th> Name </th>
+                                    <th style="width: 220px"> Actions </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="subFolders.length == 0">
+                                    <td colspan="3">There are no folders</td>
+                                </tr>
+                                <tr ng-repeat="dir in subFolders">
+                                    <td>{{dir.Id}}</td>
+                                    <td><a href="/fs/folder?id={{dir.Id}}">{{dir.Name}}</a></td>
+                                    <td>
+                                        <button class="btn btn-xs blue-madison btn-outline" ng-click="editDir(dir)"><i class="fa fa-edit"></i>Edit</button>
+                                        <button class="btn btn-xs red-flamingo btn-outline" ng-click="deleteDir(dir)"><i class="fa fa-remove"></i>Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-docs font-green-sharp"></i>
+                        <span class="caption-subject bold font-green-sharp uppercase">Contents </span>
+                    </div>
+
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn blue" ng-click="createContent()">New</button>
+                        </div>
+                    </div>
+                    <div class="table-scrollable">
+                        <table class="table table-hover table-condensed table-light">
+                            <thead>
+                                <tr>
+                                    <th style="width: 150px"> Id </th>
+                                    <th> Name </th>
+                                    <th style="width: 220px"> Actions </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="contents.length == 0">
+                                    <td colspan="3">There are no items</td>
+                                </tr>
+                                <tr ng-repeat="file in contents">
+                                    <td>{{file.Id}}</td>
+                                    <td><a href="/fs/folder?id={{file.Id}}">{{file.Name}}</a></td>
+                                    <td>
+                                        <button class="btn btn-xs blue-madison btn-outline" ng-click="editContent(file)"><i class="fa fa-edit"></i>Edit</button>
+                                        <button class="btn btn-xs red-flamingo btn-outline" ng-click="deleteContent(file)"><i class="fa fa-remove"></i>Delete</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section js {
+    <script src="~/app/components/fs/fs.folder.js"></script>
+}

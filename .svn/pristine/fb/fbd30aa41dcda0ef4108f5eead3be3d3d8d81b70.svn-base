@@ -1,0 +1,160 @@
+﻿<div ng-controller="objDetailCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a href="/object">Objects</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>Detail</span>
+            </li>
+        </ul>
+
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        {{customObject.Name}}
+        <small>Detail information about {{customObject.Name}}</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-paper-plane font-yellow-casablanca"></i>
+                        <span class="caption-subject bold font-yellow-casablanca uppercase"> Object Info </span>                        
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form class="form-horizontal">
+                        <div class="form-body">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Name</label>
+                                <div class="col-md-4">
+                                    <p class="form-control-static">{{customObject.Name}}</p>
+                                </div>
+                            </div>
+                            <div class="form-group last">
+                                <label class="col-md-3 control-label">Description</label>
+                                <div class="col-md-4">
+                                    <p class="form-control-static">{{customObject.Description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <i class="icon-paper-plane font-yellow-casablanca"></i>
+                        <span class="caption-subject bold font-yellow-casablanca uppercase"> Fields </span>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn blue" ng-click="addField()">New</button>
+                        </div>
+                    </div>
+                    <div class="table-scrollable">
+                        <table class="table table-hover table-light">
+                            <thead>
+                                <tr>
+                                    <th style="width: 200px"> Id </th>
+                                    <th> Name </th>
+                                    <th> DataType </th>                                    
+                                    <th style="width: 180px"> Actions </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-if="customObject.Fields.length == 0">
+                                    <td colspan="4">There are no fields</td>
+                                </tr>
+                                <tr ng-repeat="field in customObject.Fields">
+                                    <td>{{field.Id}}</td>
+                                    <td>{{field.Name}}</td>
+                                    <td>{{field.DataType}}</td>
+                                    <td>
+                                        <button class="btn blue-madison btn-icon-only"><i class="fa fa-edit"></i></button>
+                                        <button class="btn red-flamingo btn-icon-only"><i class="fa fa-remove"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="newFieldModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">New Custom Field</h3>
+        </div>
+        <div class="modal-body form">
+            <!-- BEGIN FORM-->
+            <form name="objForm" class="form-horizontal">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">DataType</label>
+                        <div class="col-md-8">
+                            <select class="form-control" ng-options="type as type for type in dataTypeList" ng-model="field.DataType"></select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="field.DataType != 'Lookup'">
+                        <label class="col-md-3 control-label">Field Name</label>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" ng-model="field.Name" />
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="field.DataType == 'Text'">
+                        <label class="col-md-3 control-label">Length</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-model="field.Length" />
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="field.DataType == 'PickList' || field.DataType == 'MultiSelect'">
+                        <label class="col-md-3 control-label">Items</label>
+                        <div class="col-md-4">
+                            <textarea class="form-control" rows="3" ng-model="field.Items"></textarea>
+                            <span class="help-block">Each items in 1 line</span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group" ng-show="field.DataType == 'Lookup'">
+                        <label class="col-md-3 control-label">Object</label>
+                        <div class="col-md-4">
+                            <select class="form-control" ng-options="obj.Name as obj.Name for obj in objects" ng-model="field.LookupName"></select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- END FORM-->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+</div>
+
+@section js {
+
+    <script src="~/app/components/object/object.detail.js"></script>
+}

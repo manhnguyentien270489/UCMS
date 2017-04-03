@@ -1,0 +1,309 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+<head>
+    <meta charset="utf-8" />
+    <title>UCCM</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="LotusInn manager page" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+
+    <link href="~/app/assets/plugins/font-awesome-4.6.3/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/simple-line-icons-2.3.2/css/simple-line-icons.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/bootstrap-3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <link href="~/app/assets/plugins/icheck/css/all.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/angular-loading-bar/loading-bar.min.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/date-picker/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/angular-toastr/angular-toastr.min.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/nya-bootstrap-select/css/nya-bs-select.css" rel="stylesheet" />
+    <!-- BEGIN THEME STYLES -->
+    <link href="~/app/assets/m4.7/global/css/components.min.css" rel="stylesheet" />
+    <link href="~/app/assets/m4.7/global/css/plugins.min.css" rel="stylesheet" />
+    <link href="~/app/assets/m4.7/layouts/layout/css/layout.min.css" rel="stylesheet" />
+    <link href="~/app/assets/m4.7/layouts/layout/css/themes/light.min.css" rel="stylesheet" />
+    <link href="~/app/assets/m4.7/layouts/layout/css/custom.min.css" rel="stylesheet"/>
+
+    <link href="~/app/assets/plugins/codemirror-5.2/lib/codemirror.css" rel="stylesheet" />
+    
+
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/3024-day.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/3024-night.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/ambiance-mobile.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/ambiance.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/base16-dark.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/base16-light.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/blackboard.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/cobalt.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/colorforth.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/eclipse.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/elegant.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/erlang-dark.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/lesser-dark.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/liquibyte.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/mbo.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/mdn-like.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/midnight.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/monokai.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/neat.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/neo.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/night.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/paraiso-dark.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/paraiso-light.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/pastel-on-dark.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/rubyblue.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/solarized.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/the-matrix.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/tomorrow-night-bright.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/tomorrow-night-eighties.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/twilight.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/vibrant-ink.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/xq-dark.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/xq-light.css" rel="stylesheet" />
+    <link href="~/app/assets/plugins/codemirror-5.2/theme/zenburn.css" rel="stylesheet" />
+
+    <link href="~/app/assets/css/site.css" rel="stylesheet" />
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico"/>    
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+<body class="page-header-fixed page-content-white" ng-app="uccm.app" ng-controller="coreCtrl" ng-init="init()">
+
+    <!-- BEGIN HEADER -->
+    <div class="page-header navbar navbar-fixed-top">
+        <!-- BEGIN HEADER INNER -->
+        <div class="page-header-inner">
+            <!-- BEGIN LOGO -->
+            <div class="page-logo">
+                <a href="/">
+                    UCCM
+                </a>
+                <div class="menu-toggler sidebar-toggler">
+                    <span></span>                    
+                </div>
+            </div>
+            <!-- END LOGO -->
+            <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+            <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                <span></span>
+            </a>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <li class="dropdown dropdown-user">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                            <span class="username">
+                                {{currentUser.Username}}
+                            </span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="extra_profile.html">
+                                    <i class="icon-user"></i> My Profile
+                                </a>
+                            </li>
+                            <li class="divider">
+                            </li>
+                            <li>
+                                <a href="javascript:;" ng-click="logout()">
+                                    <i class="icon-key"></i> Log Out
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                    <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                    <li class="dropdown dropdown-quick-sidebar-toggler">
+                        <a href="javascript:;" class="dropdown-toggle" ng-click="logout()">
+                            <i class="icon-logout"></i>
+                        </a>
+                    </li>
+                    <!-- END QUICK SIDEBAR TOGGLER -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END HEADER INNER -->
+    </div>
+    <!-- END HEADER -->
+    <div class="clearfix">
+    </div>
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container">
+
+
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar-wrapper">
+            <!-- BEGIN SIDEBAR -->
+            <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+            <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+            <div class="page-sidebar navbar-collapse collapse">
+                <!-- BEGIN SIDEBAR MENU -->
+                <!-- DOC: Apply "page-sidebar-menu-light" class right after "page-sidebar-menu" to enable light sidebar menu style(without borders) -->
+                <!-- DOC: Apply "page-sidebar-menu-hover-submenu" class right after "page-sidebar-menu" to enable hoverable(hover vs accordion) sub menu mode -->
+                <!-- DOC: Apply "page-sidebar-menu-closed" class right after "page-sidebar-menu" to collapse("page-sidebar-closed" class must be applied to the body element) the sidebar sub menu mode -->
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Set data-keep-expand="true" to keep the submenues expanded -->
+                <!-- DOC: Set data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <ul class="page-sidebar-menu  page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px">
+                    <!-- DOC: To remove the sidebar toggler from the sidebar you just need to completely remove the below "sidebar-toggler-wrapper" LI element -->
+                    <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                    <li class="sidebar-toggler-wrapper hide">
+                        <div class="sidebar-toggler">
+                            <span></span>
+                        </div>
+                    </li>
+                    <!-- END SIDEBAR TOGGLER BUTTON -->
+                    <!-- DOC: To remove the search box from the sidebar you just need to completely remove the below "sidebar-search-wrapper" LI element -->
+                    @*<li class="sidebar-search-wrapper">
+                        <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                        <!-- DOC: Apply "sidebar-search-bordered" class the below search form to have bordered search box -->
+                        <!-- DOC: Apply "sidebar-search-bordered sidebar-search-solid" class the below search form to have bordered & solid search box -->
+                        <form class="sidebar-search  " action="page_general_search_3.html" method="POST">
+                            <a href="javascript:;" class="remove">
+                                <i class="icon-close"></i>
+                            </a>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search...">
+                                <span class="input-group-btn">
+                                    <a href="javascript:;" class="btn submit">
+                                        <i class="icon-magnifier"></i>
+                                    </a>
+                                </span>
+                            </div>
+                        </form>
+                        <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                    </li>*@                    
+                    <li ng-repeat="item in sidebarMenu.Items"
+                        ng-class="{'active': item.Selected, 'open': item.Opened, 'heading': item.Type == 'Heading', 'nav-item': item.Type != 'Heading'}">
+                        <h3 class="upercase" ng-if="item.Type == 'Heading'">{{item.Name}}</h3>
+                        <a href="javascript:;"
+                           class="nav-link nav-toggle"
+                           ng-click="item.Opened = !item.Opened"
+                           ng-if="item.Items.length > 0">
+                            <i class="{{item.Icon}}"></i>
+                            <span class="title">{{item.Name}}</span>
+                            <span class="arrow" ng-class="{'open': item.Opened}"></span>
+                            <span class="selected" ng-if="item.Selected"></span>
+                        </a>
+                        <a href="{{item.Url}}" class="nav-link" ng-if="item.Type != 'Heading' && (!item.Items || item.Items.length == 0) ">
+                            <i class="{{item.Icon}}"></i>
+                            <span class="title">{{item.Name}}</span>
+                            <span class="selected" ng-if="item.Selected"></span>
+                        </a>
+                        <ul ng-if="item.Items.length > 0"
+                            class="sub-menu"
+                            ng-style="item.Opened ? {'display': 'block'} : {'display': 'none'}">
+                            <li class="nav-item">
+                                <a href="{{item.Url}}" class="nav-link">
+                                    <i class="{{item.Icon}}"></i>
+                                    <span class="title">{{item.Name}}</span>
+                                    <span class="selected" ng-if="item.Selected"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- END SIDEBAR MENU -->
+                <!-- END SIDEBAR MENU -->
+            </div>
+            <!-- END SIDEBAR -->
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN CONTENT -->
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                @RenderBody()
+            </div>
+        </div>
+        <!-- END CONTENT -->
+    </div>
+    <!-- END CONTAINER -->
+    <!-- BEGIN FOOTER -->
+    <div class="page-footer">
+        <div class="page-footer-inner">
+            2017 - UCCM &copy; Imipgroup.com.
+        </div>
+        <div class="page-footer-tools">
+            <span class="go-top">
+                <i class="fa fa-angle-up"></i>
+            </span>
+        </div>
+    </div>
+    <!-- END FOOTER -->
+
+    <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="~/app/assets/plugins/jquery-2.2.4/jquery.js"></script>
+    <script src="~/app/assets/plugins/bootstrap-3.3.6/js/bootstrap.min.js"></script>
+    <script src="~/app/assets/plugins/angularjs-1.5.x/angular.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>*@
+    <script src="~/app/services/angular-route.min.js"></script>
+    <script src="~/app/assets/js/Base64.js"></script>
+    <script src="~/app/assets/js/Util.js"></script>
+    <script src="~/app/assets/plugins/lodash-4.13.1/lodash.js"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+    <script src="~/app/assets/plugins/momentjs-2.14.1/moment.min.js"></script>
+    <script src="~/app/assets/plugins/icheck/js/icheck.min.js"></script>
+    <script src="~/app/assets/plugins/icheck/icheck.js"></script>
+    <script src="~/app/assets/plugins/angular-cookie/angular-cookie.min.js"></script>
+    <script src="~/app/assets/plugins/UI Bootstrap/ui-bootstrap-tpls-1.3.3.min.js"></script>
+    <script src="~/app/assets/plugins/angular-loading-bar/loading-bar.min.js"></script>
+    <script src="~/app/assets/plugins/angular-paging/paging.min.js"></script>
+    <script src="~/app/assets/plugins/date-picker/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/app/assets/plugins/date-picker/ng-eternicode-datepicker.min.js"></script>
+    <script src="~/app/assets/plugins/angular-chart/ChartJs/Chart.min.js"></script>
+    <script src="~/app/assets/plugins/angular-chart/angular-chart.min.js"></script>
+    <script src="~/app/assets/plugins/ui.bootstrap.contextmenu/contextMenu.js"></script>
+    <script src="~/app/assets/plugins/angular-toastr/angular-toastr.tpls.min.js"></script>
+    <script src="~/app/assets/plugins/ocLazyLoad/ocLazyLoad.min.js"></script>
+    <script src="~/app/assets/plugins/angular-drag-and-drop-lists/angular-drag-and-drop-lists.min.js"></script>
+    <script src="~/app/assets/plugins/codemirror-5.2/ui-codemirror.js"></script>
+    <script src="~/app/assets/plugins/codemirror-5.2/lib/codemirror.js"></script>
+    <script src="~/app/assets/plugins/codemirror-5.2/addon/edit/matchbrackets.js"></script>
+    <link href="~/app/assets/plugins/codemirror-5.2/addon/hint/show-hint.css" rel="stylesheet" />
+    <script src="~/app/assets/plugins/codemirror-5.2/addon/hint/show-hint.js"></script>
+    <script src="~/app/assets/plugins/codemirror-5.2/mode/javascript/javascript.js"></script>
+    <script src="~/app/assets/plugins/nya-bootstrap-select/js/nya-bs-select.js"></script>
+    <!-- END PAGE LEVEL PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="~/app/assets/m4.7/global/scripts/app.js"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN PAGE LEVEL SCRIPTS -->
+    <script src="~/app/services/alertService.js"></script>
+    <script src="~/app/services/xhttpService.js"></script>
+    <script src="~/app/services/uccm.modal.js"></script>
+    <script src="~/app/app.js"></script>
+    <script src="~/app/components/core/core.js"></script>
+    @RenderSection("js", required: false)
+    <!-- END PAGE LEVEL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="~/app/assets/m4.7/layouts/layout/scripts/layout.js"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+    <!-- END JAVASCRIPTS -->
+</body>
+
+<!-- END BODY -->
+</html>

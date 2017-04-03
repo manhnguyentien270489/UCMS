@@ -1,0 +1,61 @@
+﻿<div ng-controller="cObjAddEditCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a href="/o/{{objDef.Name}}/list">{{objDef.Name}}</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>AddEdit</span>
+            </li>
+        </ul>
+
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        {{objDef.Name}}
+        <small></small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="portlet light">
+                <div class="portlet-body form">
+                    <!-- BEGIN FORM-->
+                    <form action="#" class="form-horizontal">
+                        <div class="form-body">
+                            <div class="form-group" ng-repeat="f in objDef.Fields">
+                                <label class="col-md-3 control-label">{{f.Name}}</label>
+                                <div class="col-md-4">
+                                    <input type="text" ng-show="f.DataType == 'Text'" class="form-control" ng-model="objItem[f.Name]">
+                                    <textarea class="form-control" rows="3" ng-show="f.DataType == 'TextArea'" ng-model="objItem[f.Name]"></textarea>
+                                    <input type="checkbox" ng-show="f.DataType =='Checkbox'" ng-model="objItem[f.Name]"/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-offset-3 col-md-4">
+                                    <button type="submit" class="btn green" ng-click="save()">Save</button>
+                                    <button type="button" class="btn default" ng-click="cancel()">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- END FORM-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section js {
+    <script src="~/app/components/custom-object/custom-object.addedit.js"></script>
+}

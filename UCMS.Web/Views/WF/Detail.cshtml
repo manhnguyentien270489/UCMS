@@ -1,0 +1,90 @@
+﻿<div id="wf-detail" ng-controller="wfDetailCtrl" ng-init="init()" ng-mouseup="mouseup()" ng-mousemove="mousemove($event)">
+    <div class="row">
+        <h1 class="page-title">
+            Workflow Process
+            <small>Add/Edit</small>
+        </h1>
+        <div class="addnew-form form-horizontal">
+            <div class="form-group">
+                <label class="col-md-3 control-label">Name</label>
+                <div class="col-md-4">
+                    <div class="input-icon right">
+                        <input type="text" class="form-control" name="name" placeholder="Enter workflow name here" ng-model="wfProcess.Name" required />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Description</label>
+                <div class="col-md-4">
+                    <div class="input-icon right">
+                        <input type="text" class="form-control" name="description" placeholder="Enter workflow description here" ng-model="wfProcess.Description" required />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <div class="col-md-4">
+                    <button class="btn blue-steel btn-outline" ng-click="createWf()" ng-show="!id"><i class="fa fa-plus"></i> Create</button>
+                    <button class="btn blue-steel btn-outline" ng-click="updateWf()" ng-show="id"><i class="fa fa-plus"></i> Update</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-show="id">
+        <h4 class="form-section">Steps</h4>
+        <div id="screen" class="col-md-6">
+
+        </div>
+        <div class="col-md-6 form-horizontal">
+            <!-- BEGIN PAGE TITLE-->
+            <h1 class="page-title">
+                <small>Add/Edit step</small>
+            </h1>
+            <div class="addnew-form">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Preview</label>
+                    <div class="col-md-4">
+                        <div class="preview" ng-mousedown="mousedown()">
+                            <label class="control-label">{{newStep.Name}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Referrer</label>
+                    <div class="col-md-4">
+                        <div class="input-icon right">
+                            <label class="control-label">{{selectedNode.label}}</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Name</label>
+                    <div class="col-md-4">
+                        <div class="input-icon right">
+                            <input type="text" class="form-control" name="name" placeholder="Enter step name here" ng-model="newStep.Name" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Description</label>
+                    <div class="col-md-4">
+                        <textarea type="text" height="150" class="form-control" name="description" placeholder="Enter step description here" ng-model="newStep.Description"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label"></label>
+                    <div class="col-md-4">
+                        <button class="btn blue-steel btn-outline" ng-click="createStep()"><i class="fa fa-plus"></i> Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section js {
+    <script src="~/app/assets/js/vis.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="~/app/assets/css/vis.min.css" />
+    <script src="~/app/components/wf/detail.js"></script>
+}

@@ -1,0 +1,64 @@
+﻿<div ng-controller="datalistCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>DataList</span>
+            </li>
+        </ul>
+
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        {{contentType.Name}}
+        <small>{{contentType.Description}}</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div ng-repeat="item in alertSvc.alerts" class="alert alert-{{item.type}}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="alertSvc.remove(item)"></button>
+        <strong>{{item.title}}</strong> {{item.body}}
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn blue" ng-click="create()">New</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-scrollable">
+                <table class="table table-hover table-condensed table-light">
+                    <thead>
+                        <tr>
+                            <th style="width: 150px"> Id </th>
+                            <th ng-repeat="field in contentType.Fields">{{field.Label}}</th>
+                            <th style="width: 220px"> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-if="dataLists.length == 0">
+                            <td colspan="4">There are no data list items</td>
+                        </tr>
+                        <tr ng-repeat="item in dataLists">
+                            <td>{{item.Id}}</td>
+                            <td ng-repeat="field in contentType.Fields">{{item.Values[field.Name]}}</td>
+                            <td>
+                                <button class="btn btn-xs blue-madison btn-outline" ng-click="edit(item)"><i class="fa fa-edit"></i>Edit</button>
+                                <button class="btn btn-xs red-flamingo btn-outline" ng-click="delete(item)"><i class="fa fa-remove"></i>Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section js {
+    <script src="~/app/components/datalist/datalist.list.js"></script>
+}

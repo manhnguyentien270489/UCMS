@@ -1,0 +1,108 @@
+﻿<div ng-controller="contentAddEditCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li ng-repeat="item in content.Folder.Path" ng-if="type=='content'">
+                <a href="/fs/folder?id={{item.Id}}">{{item.Name}}</a>
+                <i class="fa fa-circle"></i>
+            </li>
+
+            <li ng-if="type=='list'">
+                <a href="/datalist">DataList</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>Add/Edit</span>
+            </li>
+        </ul>
+
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title" ng-show="type=='content'">
+        Content Type
+        <small>Add/Edit content type</small>
+    </h1>
+    <h1 class="page-title" ng-show="type=='list'">
+        {{content.ContentType.Name}}
+        <small>Add/Edit {{content.ContentType.Name}} item</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div ng-repeat="item in alertSvc.alerts" class="alert alert-{{item.type}}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="alertSvc.remove(item)"></button>
+        <strong>{{item.title}}</strong> {{item.body}}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form name="contentForm" class="form form-horizontal" novalidate>
+                <div class="form-body">
+                    <div class="form-group" ng-class="{'has-error': hasError(contentForm.name, 'required')}" ng-if="type == 'content'">
+                        <label class="col-md-3 control-label">Name</label>
+                        <div class="col-md-4">
+                            <div class="input-icon right">
+                                <i class="fa fa-warning" ng-show="hasError(contentForm.name, 'required')"></i>
+                                <input type="text" class="form-control" name="name" placeholder="Enter content name here" ng-model="content.Name" required />
+                            </div>
+                            <span class="help-block" ng-show="hasError(contentForm.name, 'required')">Content name is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-if="type == 'content'">
+                        <label class="col-md-3 control-label">Content Type</label>
+                        <div class="col-md-4">
+                            <select class="form-control" ng-model="content.ContentType" ng-options="type as type.Name for type in contentTypes track by type.Id"></select>
+                        </div>
+                    </div>
+                    <h4 class="form-section" ng-if="type == 'content'">Fields</h4>
+                    <div class="form-group" ng-repeat="field in content.ContentType.Fields">
+                        <label class="col-md-3 control-label">{{field.Label}}</label>
+                        <div class="col-md-4" ng-show="field.DataType == 'Text'">
+                            <input type="text" class="form-control" ng-model="content.Values[field.Name]"/>
+                        </div>
+                        <div class="col-md-4" ng-if="field.DataType == 'TextArea'">
+                            <textarea class="form-control" rows="3" ng-model="content.Values[field.Name]"></textarea>
+                        </div>
+                        <div class="col-md-4" style="padding-top: 7px" ng-show="field.DataType=='Checkbox'">
+                            <input icheck skin="square-blue" type="checkbox" ng-model="content.Values[field.Name]"/>
+                        </div>
+                        <div class="col-md-4" ng-if="field.DataType=='Number'">
+                            <input type="text" class="form-control input-small" ng-model="content.Values[field.Name]"/>
+                        </div>
+                        <div class="col-md-4" ng-if="field.DataType == 'DateTime'">
+                            <input type="text" class="form-control" ng-model="content.Values[field.Name]"/>
+                        </div>
+                        <div class="col-md-4" ng-if="field.DataType == 'Picklist'">
+                            <select class="form-control" ng-model="content.Values[field.Name]" ng-options="item as item for item in field.Items"></select>
+                        </div>
+                        <div class="col-md-4" ng-if="field.DataType == 'MultiSelect'">
+                            @*<select multiple class="form-control" ng-model="content.Values[field.Name]" ng-options="item as item for item in field.Items"></select>*@
+                            <ol class="nya-bs-select form-control" ng-model="content.Values[field.Name]" multiple>
+                                <li nya-bs-option="item in field.Items">
+                                    <a>
+                                        {{ item }}
+                                        <span class="fa fa-check check-mark"></span>
+                                    </a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-4">
+                            <button type="submit" class="btn btn-primary" ng-disabled="!validateForm(contentForm)" ng-click="submit()">Submit</button>
+                            <button type="button" class="btn default" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section js {
+    <script src="~/app/components/content/content.addedit.js"></script>
+}

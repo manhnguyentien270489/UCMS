@@ -1,0 +1,33 @@
+﻿{
+  "Items": [
+    {
+      "Id": "dashboard",
+      "Name": "Dashboard",
+      "Url": "/",
+      "Icon": "icon-home"
+    },
+    {
+      "Id": "setup",
+      "Name": "SETUP",
+      "Type": "Heading"
+    },
+    {
+      "Id": "ContentType",
+      "Name": "Content Types",
+      "Url": "/contenttype",
+      "Icon": "icon-puzzle"
+    },
+    {
+      "Id": "Library",
+      "Name": "Library",
+      "Url": "/fs/library",
+      "Icon": "icon-organization"
+    },
+    {
+      "Id": "Workflow",
+      "Name": "Workflow",
+      "Url": "/wf/list",
+      "Icon": "icon-grid"
+    }
+  ]      
+}

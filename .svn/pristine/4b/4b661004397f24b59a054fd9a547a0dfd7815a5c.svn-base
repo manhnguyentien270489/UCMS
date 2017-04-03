@@ -1,0 +1,64 @@
+﻿<div ng-controller="libraryCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>Library</span>
+            </li>
+        </ul>
+
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        Library
+        <small>Manage library in UCCM</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div ng-repeat="item in alertSvc.alerts" class="alert alert-{{item.type}}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="alertSvc.remove(item)"></button>
+        <strong>{{item.title}}</strong> {{item.body}}
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn blue" ng-click="create()">New</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-scrollable">
+                <table class="table table-hover table-condensed table-light">
+                    <thead>
+                        <tr>
+                            <th style="width: 150px"> Id </th>
+                            <th> Name </th>
+                            <th style="width: 220px"> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-if="libraries.length == 0">
+                            <td colspan="3">There are no libraries</td>
+                        </tr>
+                        <tr ng-repeat="lib in libraries">
+                            <td>{{lib.Id}}</td>
+                            <td><a href="/fs/folder?id={{lib.Id}}">{{lib.Name}}</a></td>
+                            <td>
+                                <button class="btn btn-xs blue-madison btn-outline" ng-click="edit(lib)"><i class="fa fa-edit"></i>Edit</button>
+                                <button class="btn btn-xs red-flamingo btn-outline" ng-click="delete(lib)"><i class="fa fa-remove"></i>Delete</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section js {
+<script src="~/app/components/fs/fs.library.js"></script>
+}

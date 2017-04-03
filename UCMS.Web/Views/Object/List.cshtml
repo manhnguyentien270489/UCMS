@@ -1,0 +1,61 @@
+﻿<div ng-controller="cobjectListCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>{{objDef.Name}}</span>
+            </li>
+        </ul>
+
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        {{objDef.Name}}
+        <small>Manage records for {{objDef.Name}}</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn blue" ng-click="addNew()">New</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-scrollable">
+                <table class="table table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th style="width: 200px"> Id </th>
+                            <th ng-repeat="f in objDef.Fields">{{f.Name}}</th>
+                            <th style="width: 150px"> Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-if="cobjects.Total == 0">
+                            <td colspan="{{objDef.Fields.Length + 2}}">There are no fields</td>
+                        </tr>
+                        
+                        <tr ng-repeat="item in cobjects.Items">
+                            <td>{{item.Id}}</td>
+                            <td ng-repeat="f in objDef.Fields">{{item[f.Name]}}</td>                            
+                            <td>
+                                <button class="btn blue-madison btn-icon-only"><i class="fa fa-edit"></i></button>
+                                <button class="btn red-flamingo btn-icon-only"><i class="fa fa-remove"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section js {
+
+    <script src="~/app/components/custom-object/custom-object.list.js"></script>
+}

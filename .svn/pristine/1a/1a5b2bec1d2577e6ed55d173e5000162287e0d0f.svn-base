@@ -1,0 +1,123 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using UCMS.Core;
+using UCMS.Model;
+
+namespace UCMS.Data
+{
+    internal class DataHelper
+    {
+        public static ContentType ReadContentType(IDataReader reader)
+        {
+            reader.Read();
+            var contentType = new ContentType
+            {
+                Id = reader["Id"].ToString(),
+                Name = reader["Name"].ToString(),
+                IsDataList = Convert.ToBoolean(reader["IsDataList"]),
+                Description = reader["Description"].ToString(),
+                Fields = new List<ContentTypeField>()
+            };
+            reader.NextResult();
+            while (reader.Read())
+            {
+                var field = new ContentTypeField
+                {
+                    Id = reader["Id"].ToString(),
+                    Name = reader["Name"].ToString(),
+                    Label = reader["Label"].ToString(),
+                    DataType = (DataType)Enum.Parse(typeof(DataType), reader["DataType"].ToString()),
+                    Length = Convert.ToInt32(reader["Length"]),
+                    LookupType = reader["LookupType"].ToString(),
+                    LookupField = reader["LookupField"].ToString(),
+                    ContentTypeId = reader["ContentTypeId"].ToString(),
+                    Items = reader["Items"].ToString().Split(new[] { '|' }).ToList()
+                };
+                contentType.Fields.Add(field);
+            }
+            return contentType;
+        }
+
+        public static List<DataList> ReadDataList(IDataReader reader)
+        {
+            var result = new List<DataList>();
+            while (reader.Read())
+            {
+                var list = new DataList
+                {
+                    Id = reader["Id"].ToString(),
+                    Name = reader["Name"].ToString()
+                };
+                var contentTypeId = reader["ContentTypeId"].ToString();
+                list.ContentType = new ContentType { Id = contentTypeId };
+                list.Values = reader["Values"].ToString().FromJson<Dictionary<string, object>>();
+                result.Add(list);
+            }
+            return result;
+        }
+
+        public static List<Folder> ReadFolders(IDataReader reader)
+        {
+            var list = new List<Folder>();
+            while (reader.Read())
+            {
+                var item = new Folder
+                {
+                    Id = reader["Id"].ToString(),
+                    Name = reader["Name"].ToString(),
+                    ParentId = reader["ParentId"].ToString(),
+                    Path = reader["Path"].ToString().FromJson<List<FolderPathItem>>()
+                };
+                list.Add(item);
+            }
+            return list;
+        }
+
+        public static List<Content> ReadContents(IDataReader reader)
+        {
+            var list = new List<Content>();
+            while (reader.Read())
+            {
+                var item = new Content
+                {
+                    Id = reader["Id"].ToString(),
+                    Name = reader["Name"].ToString(),
+                    Values = reader["Values"].ToString().FromJson<Dictionary<string, object>>(),
+                    ContentType = new ContentType
+                    {
+                        Id=reader["ContentTypeId"].ToString()
+                    },
+                    Folder = new Folder
+                    {
+                        Id=reader["FolderId"].ToString()
+                    },
+                    Attachments = new List<Attachment>()
+                };
+                var tags = reader["Tags"].ToString();
+                tags = tags.Trim('{', '}');
+                item.Tags = tags.Split(new[] {','}, StringSplitOptions.RemoveEmptyEntries).ToList();
+                list.Add(item);
+            }
+            return list;            
+        }
+
+        public static List<Attachment> ReadAttachments(IDataReader reader)
+        {
+            var list = new List<Attachment>();
+            while (reader.Read())
+            {
+                var item = new Attachment
+                {
+                    Id = reader["Id"].ToString(),
+                    ContentId = reader["ContentId"].ToString(),
+                    MIME = reader["MIME"].ToString(),
+                    Name = reader["Name"].ToString()
+                };
+                list.Add(item);
+            }
+            return list;
+        } 
+    }
+}

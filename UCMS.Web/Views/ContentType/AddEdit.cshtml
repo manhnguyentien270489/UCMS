@@ -1,0 +1,173 @@
+﻿<div ng-controller="contentTypeAddEditCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <a href="/contenttype">Content Type</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>Add/Edit</span>
+            </li>
+        </ul>
+
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        Content Type
+        <small>Add/Edit content type</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div ng-repeat="item in alertSvc.alerts" class="alert alert-{{item.type}}">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="alertSvc.remove(item)"></button>
+        <strong>{{item.title}}</strong> {{item.body}}
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form name="contentTypeForm" class="form form-horizontal" novalidate>
+                <div class="form-body">
+                    <div class="form-group" ng-class="{'has-error': hasError(contentTypeForm.name, 'required')}">
+                        <label class="col-md-3 control-label">Name</label>
+                        <div class="col-md-4">
+                            <div class="input-icon right">
+                                <i class="fa fa-warning" ng-show="hasError(contentTypeForm.name, 'required')"></i>
+                                <input type="text" class="form-control" name="name" placeholder="Enter content type name here" ng-model="type.Name" required/>
+                            </div>
+                            <span class="help-block" ng-show="hasError(contentTypeForm.name, 'required')">Content Type name is required</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Description</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" name="description" placeholder="Enter content type description here" ng-model="type.Description"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Is DataList</label>
+                        <div class="col-md-4" style="padding-top: 7px">
+                            <input type="checkbox" icheck skin="square-blue" ng-model="type.IsDataList"/>
+                        </div>
+                    </div>
+
+                    <h4 class="form-section">Fields</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button class="btn blue-steel btn-outline" ng-click="createField()"><i class="fa fa-plus"></i> New</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-scrollable">
+                                <table class="table table-hover table-condensed table-light">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 150px"> Id </th>
+                                            <th> Name </th>
+                                            <th> Label </th>
+                                            <th> DataType </th>
+                                            <th style="width: 180px"> Actions </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-if="type.Fields.length == 0">
+                                            <td colspan="4">There are no fields</td>
+                                        </tr>
+                                        <tr ng-repeat="field in type.Fields">
+                                            <td>{{field.Id}}</td>
+                                            <td>{{field.Name}}</td>
+                                            <td>{{field.Label}}</td>
+                                            <td>{{field.DataType}}</td>
+                                            <td>
+                                                <button class="btn btn-xs blue-madison btn-outline" ng-click="edit(field)"><i class="fa fa-edit"></i> Edit</button>
+                                                <button class="btn btn-xs red-flamingo btn-outline" ng-click="delete(field)"><i class="fa fa-remove"></i> Delete</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-3 col-md-4">
+                            <button type="submit" class="btn btn-primary" ng-click="submit()">Submit</button>
+                            <button type="button" class="btn default" ng-click="cancel()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/ng-template" id="fieldModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Field information!</h3>
+        </div>
+        <div class="modal-body">
+            <form name="fieldForm" class="form-horizontal" novalidate>
+                <div class="form-body">
+                    <div class="form-group" ng-class="{'has-error': hasError(fieldForm.name, 'invalid')}">
+                        <label class="col-md-3 control-label">Name</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right">
+                                <i class="fa fa-warning" ng-show="hasError(fieldForm.name, 'invalid')"></i>
+                                <input type="text" class="form-control" name="name" placeholder="Enter field name here" ng-model="field.Name" required ng-pattern="namePattern" />
+                            </div>
+                            <span class="help-block" ng-show="hasError(fieldForm.name, 'required')">Field name is required</span>
+                            <span class="help-block" ng-show="hasError(fieldForm.name, 'pattern')">Field name must be a string contains alphabet characters only</span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-class="{'has-error': hasError(fieldForm.label, 'invalid')}">
+                        <label class="col-md-3 control-label">Label</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right">
+                                <i class="fa fa-warning" ng-show="hasError(fieldForm.label, 'invalid')"></i>
+                                <input type="text" class="form-control" name="label" placeholder="Enter field label here" ng-model="field.Label" required />
+                            </div>
+                            <span class="help-block" ng-show="hasError(fieldForm.label, 'required')">Field label is required</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Data Type</label>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-options="type as type for type in datatypes" ng-model="field.DataType"></select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="field.DataType == 'Picklist' || field.DataType == 'MultiSelect'">
+                        <label class="col-md-3 control-label">Items</label>
+                        <div class="col-md-5">
+                            <textarea class="form-control" ng-model="fieldItems" rows="4"></textarea>
+                            <span class="help-block">Enter each items in one line</span>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="field.DataType == 'Lookup'">
+                        <label class="col-md-3 control-label">Lookup Type</label>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-options="type as type.Name for type in contentTypes" ng-model="lookup.Type"></select>
+                        </div>
+                    </div>
+                    <div class="form-group" ng-show="field.DataType == 'Lookup' && lookup.Type != undefined" >
+                        <label class="col-md-3 control-label">Lookup Field</label>
+                        <div class="col-md-5">
+                            <select class="form-control" ng-options="field as field.Name for field in lookup.Type.Fields" ng-model="lookup.Field"></select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn blue" ng-disabled="fieldForm.$invalid" type="button" ng-click="ok()">Ok</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>
+
+@section js {
+    <script src="~/app/components/content-type/contentType.addedit.js"></script>
+}

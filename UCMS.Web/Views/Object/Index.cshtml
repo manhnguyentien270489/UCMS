@@ -1,0 +1,97 @@
+﻿<div ng-controller="objectListCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>            
+            <li>
+                <span>Objects</span>
+            </li>
+        </ul>
+        
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        Custom Object
+        <small>Manage objects in UCCM</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <div class="row">
+        <div class="col-md-6">
+            <button class="btn blue" ng-click="createNew()">New</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-scrollable">
+                <table class="table table-hover table-light">
+                    <thead>
+                        <tr>
+                            <th style="width: 200px"> Id </th>
+                            <th> Name </th>
+                            <th> Description </th>
+                            <th style="width: 180px"> Actions </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-if="objects.length == 0">
+                            <td colspan="4">There are no objects</td>
+                        </tr>
+                        <tr ng-repeat="obj in objects">
+                            <td>{{obj.Id}}</td>
+                            <td><a href="/object/detail?name={{obj.Name}}">{{obj.Name}}</a></td>
+                            <td>{{obj.Description}}</td>
+                            <td>
+                                <button class="btn green-sharp btn-icon-only" ng-click="manage(obj)"><i class="fa fa-list"></i></button>
+                                <button class="btn blue-madison btn-icon-only"><i class="fa fa-edit"></i></button>
+                                <button class="btn red-flamingo btn-icon-only"><i class="fa fa-remove"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/ng-template" id="customObjectModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">New Custom Object</h3>
+        </div>
+        <div class="modal-body form">
+            <!-- BEGIN FORM-->
+            <form name="objForm" class="form-horizontal">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Name</label>
+                        <div class="col-md-8">
+                            <input type="text" name="name"class="form-control" ng-model="customObject.Name" required/>
+                            <span class="help-block" ng-show="objForm.name.$dirty && objForm.name.$error.required">
+                                Object Name is required
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group last">
+                        <label class="col-md-3 control-label" ng-model="customObject.Description">Description</label>
+                        <div class="col-md-8">
+                            <textarea class="form-control" rows="3"></textarea>                            
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- END FORM-->
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">Ok</button>
+            <button class="btn btn-default" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+
+</div>
+
+@section js {
+    
+    <script src="~/app/components/object/object.list.js"></script>
+}

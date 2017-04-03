@@ -1,0 +1,29 @@
+﻿<div ng-controller="cformShowCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>{{cform.Title}}</span>
+            </li>
+        </ul>
+
+    </div>
+    <!-- BEGIN PAGE TITLE-->
+    <h1 class="page-title">
+        {{cform.Title}}
+        <small>{{cform.Description}}</small>
+    </h1>
+    <!-- END PAGE TITLE-->
+    <!-- END PAGE HEADER-->
+    <ng-include src="templateSrc"></ng-include>
+    
+</div>
+
+@section js {
+
+    <script src="~/app/components/custom-form/custom-form.show.js"></script>
+}

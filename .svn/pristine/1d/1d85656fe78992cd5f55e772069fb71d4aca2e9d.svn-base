@@ -1,0 +1,140 @@
+﻿<div ng-controller="cformEditCtrl" ng-init="init()">
+    <!-- BEGIN PAGE HEADER-->
+    <div class="page-bar">
+        <ul class="page-breadcrumb">
+            <li>
+                <a href="/">Home</a>
+                <i class="fa fa-circle"></i>
+            </li>
+            <li>
+                <span>{{cform.Title}}</span>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-9">
+            <!-- BEGIN PAGE TITLE-->
+            <h1 class="page-title">
+                {{cform.Title}}
+                <small>{{cform.Description}}</small>
+            </h1>
+            <!-- END PAGE TITLE-->
+            <!-- END PAGE HEADER-->
+            <div class="row">
+                <div class="col-md-12 form">
+                    <form class="form-horizontal">
+                        <div class="form-body" style="min-height: 300px;">
+                            <div class="place-holder-item"
+                                 dnd-list="cform.Controls"
+                                 dnd-drop="onDropItem(index, item, type, cform)">
+                                <div ng-repeat="control in cform.Controls"
+                                     dnd-draggable="control"
+                                     dnd-type="control.itemType"
+                                     dnd-selected="onSelected(control)"
+                                     class="control"
+                                     ng-class="{'selected': control.Selected}">
+                                    <div class="overlay"></div>
+                                    <h3 class="form-section" ng-if="control.Type=='Section'">{{control.Label}}</h3>
+                                    <div class="form-group" ng-if="control.Type=='Row'">
+                                        <label class="col-md-3 control-label" ng-if="control.Items[0].Type != 'Button'">{{control.Items[0].Label}}</label>
+                                        <div class="col-md-4" ng-if="control.Items[0].Type != 'Button'">
+                                            <input class="form-control" type="text" ng-model="control.Item[0].Value" ng-if="control.Items[0].Type == 'Text'"/>
+                                            <textarea class="form-control" rows="3" ng-if="control.Items[0].Type == 'TextArea'"></textarea>
+                                        </div>
+                                        <div ng-if="control.Items[0].Type == 'Button'"
+                                             class="col-md-offset-3 col-md-9">
+                                            <button class="btn blue">{{control.Items[0].Label}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" style="border-left: 1px solid #e7ecf1; height: 100%; min-height: 1000px;">
+            <div class="portlet light">
+                <div class="portlet-title">
+                    <div class="caption font-green-sharp">
+                        <i class="icon-share font-green-sharp"></i>
+                        <span class="caption-subject bold uppercase"> Configuration</span>                        
+                    </div>
+                </div>
+                <div class="portlet-body form">
+                    <form class="horizontal-form">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn blue" ng-click="saveForm()">Save</button>
+                                    <button class="btn btn-outline yellow" ng-click="cancel()">Cancel</button>
+                                </div>
+                            </div>
+                            <h4 class="form-section">Properties</h4>
+                            <div class="table-scrollable">
+                                <table class="table table-hover table-light table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="prop in properties">
+                                            <td>{{prop.name}}</td>
+                                            <td><input class="prop-value" ng-model="selectedControl[prop.value]"/></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Script</td>
+                                            <td>
+                                                <button class="btn red btn-outline btn-xs" ng-click="editScript()">Edit</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h4 class="form-section">Controls</h4>
+                            <ul class="toolbox"
+                                dnd-list="toolbox.items"
+                                dnd-allowed-types="toolbox.allowedTypes"
+                                dnd-disable-if="true">
+                                <li ng-repeat="item in toolbox.items"
+                                    dnd-draggable="item"
+                                    dnd-type="item.itemType"
+                                    class="toolbox-item">
+                                    <i class="{{item.icon}}"></i>
+                                    <label class="name">
+                                        {{item.label}}
+                                    </label>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/ng-template" id="scriptEditingModal.html">
+        <div class="modal-header">
+            <h3 class="modal-title">Script Editing</h3>
+        </div>
+        <div class="modal-body" style="height: 700px;">
+            <!-- BEGIN FORM-->
+            <div style="height: 670px; width: 100%;" ui-codemirror="cmOptions" ng-model="script"></div>
+            <!-- END FORM-->
+        </div>
+        <div class="modal-footer">
+            <button class="btn blue btn-outline" type="button" ng-click="ok()">Ok</button>
+            <button class="btn gray btn-outline" type="button" ng-click="cancel()">Cancel</button>
+        </div>
+    </script>
+</div>
+
+@section js {
+
+    <script src="~/app/components/custom-form/custom-form.edit.js"></script>
+}
